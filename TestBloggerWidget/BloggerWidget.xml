@@ -1,9 +1,120 @@
 ﻿<?xml version="1.0" encoding="UTF-8" ?>
 <Module>
-  <ModulePrefs title="Test blogger widget" author="Tony Hallett"/>
+  <ModulePrefs
+    title="Truly Simple Slider for Blogger"
+    height="300"
+    description="jQuery-based slideshow for Blogger blogs"
+    author="Marie Mosley"
+    author_email="marie+sssb@codeitpretty.com"
+    thumbnail="https://lh5.googleusercontent.com/-1XMqi97ndKk/U2jq4BN8WtI/AAAAAAAAQJ0/CaAiQpJkMjE/s595/Screenshot%25202014-05-06%252009.59.16.png"
+    author_affiliation="http://www.codeitpretty.com"
+     />
+  <UserPref name="length" display_name="Seconds Between Slides" default_value="4"/>
+  <UserPref name="firstimg" display_name="First Image URL" required="true"/>
+  <UserPref name="firstlink" display_name="Click-through link for 1st Image" required="true"/>
+  <UserPref name="firstalt" display_name="Alt Text for 1st Image" required="true" />
+  <UserPref name="secimg" display_name="Second Image URL" required="true"/>
+  <UserPref name="seclink" display_name="Click-through link for 2nd Image" required="true"/>
+  <UserPref name="secalt" display_name="Alt Text for 2nd Image" required="true" />
+  <UserPref name="trimg" display_name="Third Image URL" />
+  <UserPref name="trlink" display_name="Click-through link for 3rd Image" />
+  <UserPref name="tralt" display_name="Alt Text for 3rd Image" />
+  <UserPref name="fourthimg" display_name="Fourth Image URL" />
+  <UserPref name="fourthlink" display_name="Click-through link for 4th Image" />
+  <UserPref name="fourthalt" display_name="Alt Text for 4th Image" />
+  <UserPref name="fifthimg" display_name="Fifth Image URL" />
+  <UserPref name="fifthlink" display_name="Click-through link for 5th Image" />
+  <UserPref name="fifthalt" display_name="Alt Text for 5th Image" />
+  <UserPref name="sixthimg" display_name="Sixth Image URL" />
+  <UserPref name="sixthlink" display_name="Click-through link for 6th Image" />
+  <UserPref name="sixthalt" display_name="Alt Text for 6th Image" />
+  <UserPref name="leftmargin" display_name="Left Margin (optional)" />
+  <UserPref name="rightmargin" display_name="Right Margin (optional)"/>
+
+
+
   <Content type="html">
     <![CDATA[
-      Hello,world
-    ]]>
+     <style>
+       body {
+       overflow: hidden;
+       background: none transparent;
+        }
+        
+       #slideshow { position: relative; }
+       #slideshow > a { position: absolute; }
+       #slideshow img {
+       width: 100%;
+       height: auto;
+       outline: none;
+       }
+       #slideshow a img { border: none; }
+     </style>
+
+
+   <div id="slideshow"></div>
+
+   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+   <script type="text/javascript">
+
+   var prefs = new gadgets.Prefs();
+   var images = [];
+   var timing = parseInt(prefs.getString("length")) * 1000;
+   var slideshow = $("#slideshow");
+
+  var firstslide = '<a href="' + prefs.getString("firstlink") +'" target="_parent"><img src="' +prefs.getString("firstimg")+ '" alt="' +prefs.getString("firstalt")+ '"></a>';
+  images.push(firstslide);
+  var secslide = '<a href="' + prefs.getString("seclink") +'" target="_parent"><img src="' +prefs.getString("secimg")+ '" alt="' +prefs.getString("secalt")+ '"></a>';
+  images.push(secslide);
+
+  if (prefs.getString("trimg").length > 0) {
+   var trislide = '<a href="' + prefs.getString("trlink") +'" target="_parent"><img src="' +prefs.getString("trimg")+ '" alt="' +prefs.getString("tralt")+ '"></a>';
+   images.push(trislide);
+  }
+
+  if (prefs.getString("fourthimg").length > 0) {
+   var fourthslide = '<a href="' + prefs.getString("fourthlink") +'" target="_parent"><img src="' +prefs.getString("fourthimg")+ '" alt="' +prefs.getString("fourthalt")+ '"></a>';
+   images.push(fourthslide);
+  }
+
+  if (prefs.getString("fifthimg").length > 0) {
+ var fifthslide = '<a href="' + prefs.getString("fifthlink") +'" target="_parent"><img src="' +prefs.getString("fifthimg")+ '" alt="' +prefs.getString("fifthalt")+ '"></a>';
+ images.push(fifthslide);
+ }
+
+  if (prefs.getString("sixthimg").length > 0) {
+ var sixthslide = '<a href="' + prefs.getString("sixthlink") +'" target="_parent"><img src="' +prefs.getString("sixthimg")+ '" alt="' +prefs.getString("sixthalt")+ '"></a>';
+ images.push(sixthslide);
+ }
+
+if (prefs.getString("leftmargin").length > 0 ) {
+  slideshow.css('margin-left', prefs.getString("leftmargin") + 'px');
+}
+
+if (prefs.getString("rightmargin").length > 0 ) {
+  slideshow.css('margin-right', prefs.getString("rightmargin") + 'px');
+}
+
+
+
+   for ( var i = 0; i < images.length; i++ ) {
+   slideshow.append(images[i]);
+   }
+
+  $("#slideshow > a:gt(0)").hide();
+
+    setInterval(function() {
+      $("#slideshow > a:first")
+      .fadeOut(1000)
+      .next()
+      .fadeIn(1000)
+      .end()
+      .appendTo(slideshow);
+      }, timing);
+
+
+
+   </script>
+   ]]>
   </Content>
 </Module>
