@@ -1,14 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Module>
   <ModulePrefs title="Test blogger widget" author="Tony Hallett" >
-    <!--<Require-->
   </ModulePrefs>
-  <UserPref name="Test bool preference" display_name="bool" datatype="bool"></UserPref>
+  <UserPref name="Test bool preference" display_name="bool" datatype="bool" required="false"></UserPref>
   <Content type="html">
-    <![CDATA[
-    <p>Hello world</p>
-
-
-  ]]>
-  </Content>
+<![CDATA[
+<p>Hello world</p>
+]]>
+</Content>
 </Module>
