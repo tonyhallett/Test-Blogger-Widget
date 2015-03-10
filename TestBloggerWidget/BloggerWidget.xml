@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<Module>
+  <ModulePrefs title="Test blogger widget" author="Tony Hallett"/>
+  <Content type="html">
+    <![CDATA[
+      Hello,world
+    ]]>
+  </Content>
+</Module>
